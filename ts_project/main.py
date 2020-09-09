@@ -1,57 +1,75 @@
 # -*- coding:utf-8 -*-
 
-import PySimpleGUI as sg
+import PySimpleGUI as SG
 
 
-class Promote_Model:
+def main_view():
+    SG.theme("Topanga")
+    layout_struct = [
+        [SG.Text("任职"), SG.Text("R级", size=(15, 1)), SG.Text("平均工资（S)", size=(15, 1)),
+         SG.Text("现状人数(N)", size=(15, 1)), SG.Text("调薪人数", size=(15, 1))],
+        [SG.Text("八级"), SG.InputText(size=(15, 1), default_text=""), SG.InputText(size=(15, 1), default_text=""),
+         SG.InputText(size=(15, 1), default_text=""), SG.InputText(size=(15, 1), default_text="")],
+        [SG.Text("七级"), SG.InputText(size=(15, 1), default_text=""), SG.InputText(size=(15, 1),
+                                                                                  default_text=""), SG.InputText(
+            size=(15, 1), default_text=""), SG.InputText(size=(15, 1), default_text="")],
+        [SG.Text("六级"), SG.InputText(size=(15, 1), default_text=""), SG.InputText(size=(15, 1),
+                                                                                  default_text=""), SG.InputText(
+            size=(15, 1), default_text=""), SG.InputText(size=(15, 1), default_text="")],
+        [SG.Text("五级"), SG.InputText(size=(15, 1), default_text=""), SG.InputText(size=(15, 1),
+                                                                                  default_text=""), SG.InputText(
+            size=(15, 1), default_text=""), SG.InputText(size=(15, 1), default_text="")],
+        [SG.Text("四级"), SG.InputText(size=(15, 1), default_text=""), SG.InputText(size=(15, 1),
+                                                                                  default_text=""), SG.InputText(
+            size=(15, 1), default_text=""), SG.InputText(size=(15, 1), default_text="")],
+        [SG.Text("三级"), SG.InputText(size=(15, 1), default_text=""), SG.InputText(size=(15, 1),
+                                                                                  default_text=""), SG.InputText(
+            size=(15, 1), default_text=""), SG.InputText(size=(15, 1), default_text="")],
+        [SG.Text("二级"), SG.InputText(size=(15, 1), default_text=""), SG.InputText(size=(15, 1),
+                                                                                  default_text=""), SG.InputText(
+            size=(15, 1), default_text=""), SG.InputText(size=(15, 1), default_text="")],
+        [SG.Text("一级"), SG.InputText(size=(15, 1), default_text=""), SG.InputText(size=(15, 1),
+                                                                                  default_text=""), SG.InputText(
+            size=(15, 1), default_text=""), SG.InputText(size=(15, 1), default_text="")]
+    ]
+    layout_main = [
+        [SG.Text("调薪包"), SG.InputText(key="_st_", size=(15, 1))],
+        [SG.TabGroup([[SG.Tab(title="人员结构", layout=layout_struct)]])],
+        [SG.Button("OK"), SG.Button("Exit")]
+    ]
+
+    window = SG.Window("调薪计算程序", layout=layout_main)
+    while True:
+        event, values = window.read()
+        if event in [None, 'cancel']:
+            break
+    window.close()
+
+    print(event, values[0], values[1], values[2])
+
+
+class PromoteModel:
+    # 初始化变量
+    R_key = ["R" + str(i) for i in range(3, 11)]
+    S_key = ["S" + str(i) for i in range(3, 11)]
+    N_key = ["N" + str(i) for i in range(3, 10)]
+    R_list = dict.fromkeys(["R" + str(i) for i in range(3, 11)])
+    S_list = dict.fromkeys(["S" + str(i) for i in range(3, 11)])
+    N_list = dict.fromkeys(["N" + str(i) for i in range(3, 10)])
+
+    def Conculated(self):
+        pass
+
     # 初始化函数
-    def __init__(self, ST):
+    def __init__(self, St):
         # 载入录入参数
 
         # 调薪包
-        _st = ST
-
+        _st = St
+        print(self.R_list)
         # 人员等级
+        main_view()
 
 
-sg.theme("Topanga")
-layout_struct = [
-    [sg.Text("任职"), sg.Text("R级", size=(15, 1)), sg.Text("平均工资（S)", size=(15, 1)),
-     sg.Text("现状人数(N)", size=(15, 1)), sg.Text("调薪人数", size=(15, 1))],
-    [sg.Text("八级"), sg.InputText(size=(15, 1), default_text=""), sg.InputText(size=(15, 1), default_text=""),
-     sg.InputText(size=(15, 1), default_text=""), sg.InputText(size=(15, 1), default_text="")],
-    [sg.Text("七级"), sg.InputText(size=(15, 1), default_text=""), sg.InputText(size=(15, 1),
-                                                                              default_text=""), sg.InputText(
-        size=(15, 1), default_text=""), sg.InputText(size=(15, 1), default_text="")],
-    [sg.Text("六级"), sg.InputText(size=(15, 1), default_text=""), sg.InputText(size=(15, 1),
-                                                                              default_text=""), sg.InputText(
-        size=(15, 1), default_text=""), sg.InputText(size=(15, 1), default_text="")],
-    [sg.Text("五级"), sg.InputText(size=(15, 1), default_text=""), sg.InputText(size=(15, 1),
-                                                                              default_text=""), sg.InputText(
-        size=(15, 1), default_text=""), sg.InputText(size=(15, 1), default_text="")],
-    [sg.Text("四级"), sg.InputText(size=(15, 1), default_text=""), sg.InputText(size=(15, 1),
-                                                                              default_text=""), sg.InputText(
-        size=(15, 1), default_text=""), sg.InputText(size=(15, 1), default_text="")],
-    [sg.Text("三级"), sg.InputText(size=(15, 1), default_text=""), sg.InputText(size=(15, 1),
-                                                                              default_text=""), sg.InputText(
-        size=(15, 1), default_text=""), sg.InputText(size=(15, 1), default_text="")],
-    [sg.Text("二级"), sg.InputText(size=(15, 1), default_text=""), sg.InputText(size=(15, 1),
-                                                                              default_text=""), sg.InputText(
-        size=(15, 1), default_text=""), sg.InputText(size=(15, 1), default_text="")],
-    [sg.Text("一级"), sg.InputText(size=(15, 1), default_text=""), sg.InputText(size=(15, 1),
-                                                                              default_text=""), sg.InputText(
-        size=(15, 1), default_text=""), sg.InputText(size=(15, 1), default_text="")]
-]
-layout_main = [
-    [sg.Text("调薪包"), sg.InputText(key="_st_", size=(15, 1))],
-    [sg.TabGroup([[sg.Tab(title="人员结构", layout=layout_struct)]])],
-    [sg.Button("OK"), sg.Button("Exit")]
-]
-
-window = sg.Window("调薪计算程序", layout=layout_main)
-
-event, values = window.read()
-
-window.close()
-
-# print(event, values[0], values[1], values[2])
+if __name__ == '__main__':
+    mode = PromoteModel(10)
